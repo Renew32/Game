@@ -1,5 +1,5 @@
 import pygame
-from game import Game
+from game import Game,Player
 
 pygame.init()
 
@@ -17,9 +17,9 @@ background = pygame.image.load('assets/bg.jpg')
 #charger le jeu
 game = Game()
 
-'''
+
 #charger notre joueur ( premier chargement)
-player = Player()'''
+player = Player() 
 
 
 running = True
@@ -36,7 +36,7 @@ while running:
      
     #recuperer les projectiles du joueur
     for projectile in game.player.all_projectile:
-        projectile.move()
+        projectile.move(player)
 
 
     #Appliquer l'image des projectiles
@@ -52,6 +52,7 @@ while running:
         print(pygame.K_LEFT )
         
 
+    print(game.player.rect.x)
 
     #mettre a jour l'ecran
     pygame.display.flip()
