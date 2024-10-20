@@ -1,5 +1,6 @@
 import pygame
 from game import Game,Player
+ 
 
 pygame.init()
 
@@ -19,7 +20,8 @@ game = Game()
 
 
 #charger notre joueur ( premier chargement)
-player = Player() 
+"player = Player()"
+# retrait de cette binitialisation car on cree deja Player() dans game.
 
 
 running = True
@@ -36,11 +38,17 @@ while running:
      
     #recuperer les projectiles du joueur
     for projectile in game.player.all_projectile:
-        projectile.move(player)
+        projectile.move(game.player)
 
+    #recuperer les monstres du jeu
+    for monster in game.all_monsters:
+        monster.forward()
 
     #Appliquer l'image des projectiles
     game.player.all_projectile.draw(screen)
+
+    #appliquer l'ensemble de image de mon groupe de monstre
+    game.all_monsters.draw(screen)
 
 
     #verifier si le joueur veut aller a gauche ou a droite
@@ -53,6 +61,11 @@ while running:
         
 
     print(game.player.rect.x)
+
+    #supprimer les monstres touchee par les projectiles
+    #if game.all_monsters.rect.x == game.player.all_projectile.rect.x:
+    #    game.all_monsters.remove(game.all_monsters.rect.x)
+
 
     #mettre a jour l'ecran
     pygame.display.flip()
@@ -70,7 +83,7 @@ while running:
 
             #DETECTER si la touche espace est enclenche pour le projectile
             if event.key == pygame.K_SPACE:
-                game.player.lauch_projectile()
+                game.player.launch_projectile()
 
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
