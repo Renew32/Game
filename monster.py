@@ -27,6 +27,17 @@ class Monster(pygame.sprite.Sprite):
 
         self.velocity = 0.55
 
+    def update_health_bar(self,surface):
+         #definir la couleur pour la jauge de vie (vert clair)
+        bar_color = (111,210,46)
+
+        #epaisseur et largeur de la jauge (bar)  de vie
+        bar_position = [self.rect.x, self.rect.y, self.health, 5]
+
+        #dessiner la bar de vie
+        pygame.draw.rect(surface, bar_color, bar_position)
+
+
     def forward(self):
         if not self.game.check_collision(self,self.game.all_players):
             self.rect.x -= self.velocity

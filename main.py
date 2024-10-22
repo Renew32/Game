@@ -43,6 +43,7 @@ while running:
     #recuperer les monstres du jeu
     for monster in game.all_monsters:
         monster.forward()
+        monster.update_health_bar(screen)
 
     #Appliquer l'image des projectiles
     game.player.all_projectile.draw(screen)
@@ -63,8 +64,15 @@ while running:
     print(game.player.rect.x)
 
     #supprimer les monstres touchee par les projectiles
-    #if game.all_monsters.rect.x == game.player.all_projectile.rect.x:
-    #    game.all_monsters.remove(game.all_monsters.rect.x)
+
+    ''' a verifier '''
+    # Parcourir chaque monstre dans le groupe all_monsters
+for monster in game.all_monsters:
+    # Comparer la position x du monstre avec celle du projectile
+    for projectile in game.player.all_projectile:
+        if monster.rect.x == projectile.rect.x:
+            # Code pour gérer la collision ou autre action
+            print("Collision détectée")
 
 
     #mettre a jour l'ecran
